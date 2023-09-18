@@ -5,7 +5,7 @@ const { Server } = require('socket.io');
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {  cors: {
-        origin: "http://localhost:8081/"
+        origin: "http://localhost:8081"
     }
 });
 

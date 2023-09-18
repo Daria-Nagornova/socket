@@ -5,12 +5,13 @@
 
 <script>
 const { io } = require("socket.io-client");
-/* eslint-disable no-unused-vars */
-const socket = io("https://localhosl:3001");
-/* eslint-disable no-unused-vars */
+
+const socket = io("http://localhost:3001");
+
 socket.on("connect", () => {
   console.log(socket);
 });
+
 import HelloWorld from './components/HelloWorld.vue'
 
 export default {
