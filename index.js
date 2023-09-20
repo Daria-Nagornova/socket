@@ -24,14 +24,9 @@ const messages = ['Hello world!', 'New Message']
 
 io.on('connection', (socket) => {
     socket.on('message', function (message) {
-        socket.emit('message', message);
-        setTimeout(() => {
-            socket.disconnect();
-        }, 5000);
+            socket.join('room:' + message.id);
+            io.to('room:' + message.id).emit('message', message);
     });
-   /* messages.forEach((message) => {
-        socket.emit('message', message)
-    })*/
 })
 
 httpServer.listen(3000, () => {
