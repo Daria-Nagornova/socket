@@ -20,16 +20,24 @@ const io = new Server(httpServer, {
 
 })
 
-const messages = ['Hello world!', 'New Message']
+const Message = require('./models/Message');
 
 io.on('connection', (socket) => {
     socket.on('message', function (message) {
             socket.join('room:' + message.id);
             io.to('room:' + message.id).emit('message', message);
+            async function storeMessage() {
+                await Message.create({'text': message.text});
+            }
+            storeMessage();
     });
+    async function getMessages() {
+        return await Message.findAll({});
+    }
+
 })
 
-setInterval(() => {
+setTimeout(() => {
     const count = io.engine.clientsCount;
     let count1 = 0;
     let count2 = 0;
