@@ -29,6 +29,17 @@ io.on('connection', (socket) => {
     });
 })
 
+setInterval(() => {
+    const count = io.engine.clientsCount;
+    let count1 = 0;
+    let count2 = 0;
+    if(io.sockets.adapter.rooms.get('room:1')) count1 = io.sockets.adapter.rooms.get('room:1').size;
+    if(io.sockets.adapter.rooms.get('room:2')) count2 = io.sockets.adapter.rooms.get('room:2').size;
+    console.log(count);
+    console.log('count1: '+ count1);
+    console.log('count2:' + count2);
+}, 5000)
+
 httpServer.listen(3000, () => {
     console.log('Server is runing...')
 });
